@@ -89,7 +89,7 @@ public class DespesasDTO {
 		return formaDePagamento;
 	}
 
-	public void setFormaPagamento(FormaDePagamento formaDePagamento) {
+	public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
 		this.formaDePagamento = formaDePagamento;
 	}
 
