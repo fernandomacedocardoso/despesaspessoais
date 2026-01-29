@@ -59,16 +59,15 @@ public class DespesaController {
     }
 
     /**
-     * Converte Entidade Despesa (Service/JPA) para DespesasResponseDTO (saída).
+     * converte entidade despesa para despesasResponseDTO
      */
     private DespesasResponseDTO mapToResponseDTO(Despesa despesa) {
-        // Mapeamento da Categoria (para o DTO Simples)
         CategoriaSimplesDTO categoriaDTO = new CategoriaSimplesDTO(
             despesa.getCategoria().getId(),
             despesa.getCategoria().getNome()
         );
 
-        // Mapeamento da Despesa (usando o construtor da classe DespesasResponseDTO)
+        // mapeamento da despesa
         DespesasResponseDTO dto = new DespesasResponseDTO(
             despesa.getId(),
             despesa.getDescricao(),
@@ -82,7 +81,7 @@ public class DespesaController {
     }
     
     @PostMapping
-    public ResponseEntity<DespesasResponseDTO> criar(@RequestBody @Valid DespesasDTO dto) { // Usando DespesasDTO como Request
+    public ResponseEntity<DespesasResponseDTO> criar(@RequestBody @Valid DespesasDTO dto) {
         Despesa despesaToCreate = mapToEntity(dto);
         
         Despesa despesaSalva = despesaService.criar(despesaToCreate);
@@ -99,8 +98,6 @@ public class DespesaController {
         return ResponseEntity.created(location).body(responseDTO);
     }
 
-  
-
     @GetMapping("/{id}")
     public ResponseEntity<DespesasResponseDTO> detalhar(@PathVariable Long id) {
         Despesa despesa = despesaService.buscarPorId(id);
@@ -113,17 +110,13 @@ public class DespesaController {
     @GetMapping
     public ResponseEntity<Page<DespesasResponseDTO>> listarComFiltros(
             DespesaFilterDTO filtro,
-            @PageableDefault(sort = "data", size = 10) Pageable pageable) { 
-    	/*
-    	 * define o padrão de ordenação como campo "data" e tamanho 10, caso o cliente não especifique.
-    	 */
+            @PageableDefault(sort = "data", size = 10) Pageable pageable) {
         
         Page<DespesasResponseDTO> page = despesaService.listarComFiltros(filtro, pageable);
         
         return ResponseEntity.ok(page);
     }
-    
-   
+
     // api/v1/despesas/resumo?mes=10&ano=2025
     @GetMapping("/resumo")
     public ResponseEntity<ResumoMensalDTO> gerarResumo(

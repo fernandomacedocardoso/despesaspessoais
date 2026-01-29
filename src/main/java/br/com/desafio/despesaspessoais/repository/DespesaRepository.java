@@ -23,7 +23,7 @@ public interface DespesaRepository extends JpaRepository<Despesa, Long> {
 			@Param("dataInicio") LocalDate dataInicio,
 			@Param("dataFim") LocalDate dataFim);
 
-	boolean existsByCategoriaId(Long categoriaId);
+	boolean existsByCategoriaId(Long categoriaId); // se existe cat vinculadas
 
 	Page<Despesa> findAll(Specification<Despesa> spec, Pageable pageable);
 }

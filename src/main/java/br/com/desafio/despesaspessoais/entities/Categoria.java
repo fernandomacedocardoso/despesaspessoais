@@ -10,7 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Categoria {
 
@@ -40,64 +48,5 @@ public class Categoria {
 	protected void onUpdate() {
 		this.updatedAt = Instant.now();
 	}
-
-	public Categoria() {
-		
-	}
-
-	public Categoria(@Size(min = 3, max = 60) String nome, @Size(max = 255) String descricao, Instant createdAt,
-			Instant updatedAt) {
-		super();
-		this.nome = nome;
-		this.descricao = descricao;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Instant createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Instant updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public Long getCategoria() {
-		
-		return null;
-	}
-
 
 }
